@@ -37,26 +37,19 @@ __all__ = ('TransformNotInvertibleError', 'set_epsilon',
 __versioninfo__ = (0, 4, 0)
 __version__ = '.'.join(str(n) for n in __versioninfo__)
 
-try: # pragma: no cover
-    # Default to C implementation
-    from planar.c import _set_epsilon, Vec2, Vec2Array, Seq2, Affine, \
-        BoundingBox, Polygon, TransformNotInvertibleError
+# Fall-back to Python implementation
+from planar.vector import Vec2, Vec2Array, Seq2
+from planar.transform import Affine
+from planar.line import Line, Ray, LineSegment
+from planar.box import BoundingBox
+from planar.polygon import Polygon
 
-    __implementation__ = 'C'
-except ImportError: # pragma: no cover
-    # Fall-back to Python implementation
-    from planar.vector import Vec2, Vec2Array, Seq2
-    from planar.transform import Affine
-    from planar.line import Line, Ray, LineSegment
-    from planar.box import BoundingBox
-    from planar.polygon import Polygon
+class TransformNotInvertibleError(Exception):
+    """The transform could not be inverted"""
 
-    class TransformNotInvertibleError(Exception):
-        """The transform could not be inverted"""
+def _set_epsilon(e): pass
 
-    def _set_epsilon(e): pass
-
-    __implementation__ = 'Python'
+__implementation__ = 'Python'
 
 Point = Vec2
 """``Point`` is an alias for ``Vec2``. 
