@@ -26,8 +26,6 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #############################################################################
 
-from __future__ import division
-
 import sys
 import math
 import itertools
@@ -248,8 +246,8 @@ class Polygon(planar.Seq2):
             (last_delta.x < 0) * 1 or
             (last_delta.y > 0) * -1 or
             (last_delta.y < 0) * 1) or 0
-        for delta in itertools.ifilter(
-            lambda v: v, self._iter_edge_vectors()):
+        for delta in [v for v in
+             self._iter_edge_vectors() if v]:
             count += 1
             this_dir = (
                 (delta.x > 0) * -1 or
@@ -373,7 +371,7 @@ class Polygon(planar.Seq2):
         """
         intersects = self._segments_intersect
         last_index = len(self) - 1
-        indices = range(len(self))
+        indices = list(range(len(self)))
         points = ([(tuple(self[i - 1]), tuple(self[i]), i) for i in indices] 
             + [(tuple(self[i]), tuple(self[i - 1]), i) for i in indices])
         points.sort() # lexicographical sort
@@ -383,7 +381,7 @@ class Polygon(planar.Seq2):
             seg_start, seg_end, index = point
             if index not in open_segments:
                 # Segment start point
-                for open_start, open_end, open_index in open_segments.values():
+                for open_start, open_end, open_index in list(open_segments.values()):
                     # ignore adjacent edges
                     if (last_index > abs(index - open_index) > 1
                         and intersects(seg_start, seg_end, open_start, open_end)):
@@ -452,7 +450,7 @@ class Polygon(planar.Seq2):
             return True
 
         # Test for identical verts
-        indices = range(len(self))
+        indices = list(range(len(self)))
         for i in indices:
             if self[i] != other[i]:
                 break

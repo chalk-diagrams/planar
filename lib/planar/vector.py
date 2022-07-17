@@ -28,8 +28,6 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #############################################################################
 
-from __future__ import division
-
 import math
 import planar
 from planar.util import cached_property, assert_unorderable, cos_sin_deg
@@ -99,7 +97,7 @@ class Vec2(tuple):
         """
         return self.length2 < planar.EPSILON2
 
-    def __nonzero__(self):
+    def __bool__(self):
         """A vector is True if it is not the null vector."""
         return self[0] != 0.0 or self[1] != 0.0
 
@@ -529,7 +527,7 @@ class Seq2(object):
 
     __deepcopy__ = __copy__
 
-    def __nonzero__(self):
+    def __bool__(self):
         return bool(self._vectors)
 
     def __hash__(self):

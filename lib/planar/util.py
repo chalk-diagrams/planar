@@ -38,15 +38,15 @@ def cached_property(func):
     time it is accessed.
     """
 
-    def getter(self, name=func.func_name):
+    def getter(self, name=func.__name__):
         try:
             return self.__dict__[name]
         except KeyError:
             self.__dict__[name] = value = func(self)
             return value
     
-    getter.func_name = func.func_name
-    return property(getter, doc=func.func_doc)
+    getter.__name__ = func.__name__
+    return property(getter, doc=func.__name__)
 
 def cos_sin_deg(deg):
     """Return the cosine and sin for the given angle

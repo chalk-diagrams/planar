@@ -26,7 +26,6 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #############################################################################
 
-from __future__ import division
 import planar
 import math
 
@@ -91,9 +90,9 @@ class Line(_LinearGeometry):
         """
         points = iter(points)
         try:
-            start = end = planar.Vec2(*points.next())
+            start = end = planar.Vec2(*next(points))
             while end == start:
-                end = planar.Vec2(*points.next())
+                end = planar.Vec2(*next(points))
         except StopIteration:
             raise ValueError("Expected iterable of 2 or more distinct points")
         line = _LinearGeometry.__new__(cls)
@@ -260,9 +259,9 @@ class Ray(_LinearGeometry):
         """
         points = iter(points)
         try:
-            start = end = planar.Vec2(*points.next())
+            start = end = planar.Vec2(*next(points))
             while end == start:
-                end = planar.Vec2(*points.next())
+                end = planar.Vec2(*next(points))
         except StopIteration:
             raise ValueError("Expected iterable of 2 or more distinct points")
         ray = _LinearGeometry.__new__(cls)
@@ -414,7 +413,7 @@ class LineSegment(_LinearGeometry):
         """
         points = iter(points)
         try:
-            start = end = planar.Vec2(*points.next())
+            start = end = planar.Vec2(*next(points))
         except StopIteration:
             raise ValueError("Expected iterable of 1 or more points")
         furthest = 0.0

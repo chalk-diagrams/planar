@@ -26,8 +26,6 @@
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #############################################################################
 
-from __future__ import division
-
 import math
 import planar
 from planar.util import cached_property
@@ -48,9 +46,9 @@ class BoundingBox(object):
     def _init_min_max(self, points):
         points = iter(points)
         try:
-            min_x, min_y = max_x, max_y = points.next()
+            min_x, min_y = max_x, max_y = next(points)
         except StopIteration:
-            raise ValueError, "BoundingBox() requires at least one point"
+            raise ValueError("BoundingBox() requires at least one point")
         for x, y in points:
             if x < min_x:
                 min_x = x * 1.0
@@ -120,9 +118,9 @@ class BoundingBox(object):
         """
         shapes = iter(shapes)
         try:
-            shape = shapes.next()
+            shape = next(shapes)
         except StopIteration:
-            raise ValueError, (
+            raise ValueError(
                 "BoundingBox.from_shapes(): requires at least one shape")
         min_x, min_y = shape.bounding_box.min_point
         max_x, max_y = shape.bounding_box.max_point
