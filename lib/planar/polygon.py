@@ -74,7 +74,7 @@ class Polygon(planar.Seq2):
     """
 
     def __init__(self, vertices, is_convex=None, is_simple=None):
-        #super(Polygon, self).__init__(vertices)
+        super(Polygon, self).__init__(vertices)
         if len(self) < 3:
             raise ValueError("Polygon(): minimum of 3 vertices required")
         self._clear_cached_properties()
