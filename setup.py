@@ -42,8 +42,9 @@ setup(
     ],
     platforms = 'any',
 
-    package_dir={'planar': 'lib/planar',
+    package_dir={'planar': 'planar',
                  'planar.test': 'test'},
     packages=['planar', 'planar.test'],
+    package_data={"planar": ["py.typed", "vector.pyi", "transform.pyi"]},
 
 )
