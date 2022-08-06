@@ -25,6 +25,7 @@
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #############################################################################
+from __future__ import annotations
 
 import planar
 import math
@@ -244,7 +245,7 @@ class Ray(_LinearGeometry):
         be null. Does not need to be unit-length.
     :type direction: Vec2
     """
-    def __init__(self, anchor, direction):
+    def __init__(self, anchor : Vec2, direction: Vec2) -> Ray:
         self.anchor = planar.Vec2(*anchor)
         self.direction = direction
 
