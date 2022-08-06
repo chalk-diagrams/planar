@@ -1,4 +1,4 @@
-from __future__ import annotations
+
 #############################################################################
 # Copyright (c) 2010 by Casey Duncan
 # Portions copyright (c) 2009 The Super Effective Team 
@@ -28,7 +28,7 @@ from __future__ import annotations
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #############################################################################
-
+from __future__ import annotations
 
 import math
 import planar
