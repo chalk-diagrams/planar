@@ -5,7 +5,7 @@
 import os
 import sys
 import shutil
-from distutils.core import setup, Extension
+from setuptools import setup
 
 
 srcdir = os.path.dirname(__file__)
@@ -17,7 +17,7 @@ include_dirs = ['include']
 extra_compile_args = []
 
 setup(
-    name='planar',
+    name='chalk-planar',
     version='0.4', # *** REMEMBER TO UPDATE __init__.py ***
     description='2D planar geometry library for Python.',
     long_description=read('README.txt'),
@@ -41,7 +41,6 @@ setup(
         'Operating System :: POSIX',
     ],
     platforms = 'any',
-
     package_dir={'planar': 'planar',
                  'planar.test': 'test'},
     packages=['planar', 'planar.test'],
